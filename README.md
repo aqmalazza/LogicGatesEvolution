@@ -1,69 +1,115 @@
 # Pengujian Gerbang Logika Menggunakan CircuitVerse
 
-## Deskripsi
+Repositori ini berisi praktik pengujian rangkaian digital menggunakan simulator web [CircuitVerse](https://circuitverse.org/). Praktik ini dibuat untuk memahami cara kerja gerbang logika dari tingkat dasar sampai rangkaian penjumlah biner, seperti **Half Adder**, **Full Adder**, dan **4-bit Adder**.
 
-Repositori ini berisi file praktik **Pengujian Gerbang Logika** menggunakan simulator web [CircuitVerse](https://circuitverse.org/). Praktik ini dibuat untuk memahami konsep dasar rangkaian digital, mulai dari gerbang logika sederhana hingga rangkaian penjumlah biner seperti **Half Adder**, **Full Adder**, dan **4-bit Adder**.
+Proyek ini disusun sebagai bagian dari Tugas Ujian Akhir Mata Kuliah **Arsitektur Komputer**. Melalui simulasi ini, proses kerja rangkaian digital dapat diamati secara langsung berdasarkan perubahan input dan output.
 
-Pengujian ini disusun sebagai bagian dari Tugas Ujian Akhir Mata Kuliah **Arsitektur Komputer**.
+## Daftar Isi
+
+* [Pengujian yang Dilakukan](#pengujian-yang-dilakukan)
+* [Konsep Dasar](#konsep-dasar)
+* [Daftar File](#daftar-file)
+* [Struktur Folder](#struktur-folder)
+* [Cara Mencoba Rangkaian](#cara-mencoba-rangkaian)
+* [Contoh Pengujian](#contoh-pengujian)
+* [Tujuan Pengujian](#tujuan-pengujian)
+* [Catatan](#catatan)
 
 ## Pengujian yang Dilakukan
 
-Pengujian pada repositori ini meliputi:
+Pengujian dalam repositori ini mencakup beberapa rangkaian berikut:
 
-1. **Gerbang Logika Dasar**
+### 1. Gerbang Logika Dasar
 
-   * `AND`
-   * `OR`
-   * `NOT`
+* `AND`
+* `OR`
+* `NOT`
 
-2. **Gerbang Logika Universal**
+### 2. Gerbang Logika Universal
 
-   * `NAND`
-   * `NOR`
+* `NAND`
+* `NOR`
 
-3. **Gerbang Logika Kombinasi**
+### 3. Gerbang Logika Kombinasi
 
-   * `XOR`
-   * `XNOR`
+* `XOR`
+* `XNOR`
 
-4. **Half Adder**
+### 4. Half Adder
 
-   * Metode `XOR` dan `AND`
-   * Metode `AND`, `OR`, dan `NOT`
-   * Metode `NAND Only`
-   * Metode `NOR Only`
+Half Adder diuji menggunakan beberapa pendekatan rangkaian, yaitu:
 
-5. **Full Adder**
+* Metode `XOR` dan `AND`
+* Metode `AND`, `OR`, dan `NOT`
+* Metode `NAND Only`
+* Metode `NOR Only`
 
-   * Metode standar `XOR`, `AND`, dan `OR`
-   * Metode `AND`, `OR`, dan `NOT`
-   * Metode `NAND Only`
-   * Metode `NOR Only`
+### 5. Full Adder
 
-6. **4-bit Adder**
+Full Adder diuji menggunakan beberapa metode pembentukan rangkaian, yaitu:
 
-   * Cooming Soon
+* Metode standar `XOR`, `AND`, dan `OR`
+* Metode `AND`, `OR`, dan `NOT`
+* Metode `NAND Only`
+* Metode `NOR Only`
 
-7. **Rangkaian Lanjutan**
+### 6. 4-bit Adder
 
-   * Subtractor
-   * Multiplexer
-   * ALU sederhana
+4-bit Adder dibuat dengan menghubungkan empat rangkaian Full Adder secara berurutan. Rangkaian ini digunakan untuk menjumlahkan dua bilangan biner 4-bit.
+
+### 7. Rangkaian Lanjutan
+
+Selain rangkaian dasar dan adder, repositori ini juga memuat pengujian rangkaian lanjutan, seperti:
+
+* Subtractor
+* Multiplexer
+* ALU sederhana
 
 ## Konsep Dasar
 
 ### Half Adder
 
-Half Adder digunakan untuk menjumlahkan dua bit, yaitu `A` dan `B`.
+Half Adder adalah rangkaian penjumlah sederhana yang digunakan untuk menjumlahkan dua bit, yaitu `A` dan `B`.
+
+Rangkaian ini menghasilkan dua output:
+
+* `SUM` sebagai hasil penjumlahan
+* `Carry` sebagai nilai bawaan jika hasil penjumlahan melebihi 1 bit
+
+Rumus Half Adder:
 
 ```text
 SUM   = A XOR B
 Carry = A AND B
 ```
 
+Contoh:
+
+```text
+A = 1
+B = 1
+```
+
+Hasilnya:
+
+```text
+SUM   = 0
+Carry = 1
+```
+
+Jika ditulis dalam bentuk biner, hasilnya adalah:
+
+```text
+10
+```
+
 ### Full Adder
 
 Full Adder digunakan untuk menjumlahkan tiga input, yaitu `A`, `B`, dan `Cin`.
+
+`Cin` adalah carry input yang berasal dari proses penjumlahan sebelumnya. Karena itu, Full Adder lebih lengkap dibandingkan Half Adder dan dapat digunakan sebagai dasar untuk membuat rangkaian penjumlah multi-bit.
+
+Rumus Full Adder:
 
 ```text
 S1   = A XOR B
@@ -73,19 +119,47 @@ C2   = S1 AND Cin
 Cout = C1 OR C2
 ```
 
+Keterangan:
+
+* `SUM` adalah hasil penjumlahan pada bit tersebut
+* `Cout` adalah carry output yang diteruskan ke bit berikutnya
+
 ### 4-bit Adder
 
-4-bit Adder disusun dari empat Full Adder yang saling terhubung. `Cout` dari bit sebelumnya menjadi `Cin` untuk bit berikutnya.
+4-bit Adder adalah rangkaian penjumlah yang digunakan untuk menjumlahkan dua bilangan biner 4-bit.
+
+Rangkaian ini disusun dari empat Full Adder yang saling terhubung. Carry output dari Full Adder sebelumnya akan menjadi carry input untuk Full Adder berikutnya.
+
+Ilustrasi sederhana:
 
 ```text
 FA0 -> FA1 -> FA2 -> FA3
 ```
 
+Alur carry-nya:
+
+```text
+Cin -> FA0 -> C1 -> FA1 -> C2 -> FA2 -> C3 -> FA3 -> Cout
+```
+
+Dengan susunan ini, rangkaian dapat menjumlahkan dua bilangan biner seperti:
+
+```text
+  A3 A2 A1 A0
++ B3 B2 B1 B0
+-------------
+  S3 S2 S1 S0
+```
+
+Jika hasil penjumlahan melebihi kapasitas 4-bit, maka nilai lebihnya akan keluar melalui `Cout`.
+
 ## Daftar File
 
-| Nama File        | Keterangan                                                                                                       |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `TestingGate.cv` | Berisi pengujian gerbang logika, Half Adder, Full Adder, 4-bit Adder, Subtractor, Multiplexer, dan ALU sederhana |
+| Nama File               | Keterangan                                                                                                                                    |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GatesTest.cv`          | File utama CircuitVerse yang berisi pengujian gerbang logika, Half Adder, Full Adder, 4-bit Adder, Subtractor, Multiplexer, dan ALU sederhana |
+| `assets/importfile.png` | Gambar petunjuk menu import file pada CircuitVerse                                                                                            |
+| `assets/subcircuit.png` | Gambar petunjuk tampilan circuit atau subcircuit pada CircuitVerse                                                                            |
 
 ## Struktur Folder
 
@@ -94,59 +168,95 @@ FA0 -> FA1 -> FA2 -> FA3
 ├── assets/
 │   ├── importfile.png
 │   └── subcircuit.png
-├── TestingGate.cv
+├── GatesTest.cv
 └── README.md
 ```
 
-## Langkah Mencoba Hasil Pengujian
+## Cara Mencoba Rangkaian
 
-1. Unduh file `TestingGate.cv` yang tersedia pada repositori ini.
+Ikuti langkah berikut untuk membuka dan mencoba rangkaian di CircuitVerse.
 
-2. Buka simulator CircuitVerse melalui tautan berikut:
+### 1. Unduh File Project
 
-   https://circuitverse.org/simulator
+Unduh file berikut dari repositori:
 
-3. Pada menu `Project`, pilih `Import File`.
+```text
+GatesTest.cv
+```
 
-   <img src="assets/importfile.png" alt="Menu Import File pada CircuitVerse" width="250">
+File ini merupakan file utama yang berisi rangkaian digital yang sudah dibuat.
 
-4. Pilih file `TestingGate.cv`.
+### 2. Buka CircuitVerse
 
-5. Jika rangkaian berhasil muncul pada simulator, proses import telah berhasil.
+Masuk ke simulator CircuitVerse melalui tautan berikut:
 
-6. Beberapa rangkaian tersedia dalam bentuk circuit atau subcircuit. Pilih tab circuit yang ingin diuji.
+```text
+https://circuitverse.org/simulator
+```
 
-   <img src="assets/subcircuit.png" alt="Tampilan subcircuit pada CircuitVerse" width="250">
+### 3. Import File ke CircuitVerse
 
-7. Ubah nilai input pada rangkaian, lalu amati perubahan output yang dihasilkan.
+Pada halaman simulator, buka menu:
+
+```text
+Project -> Import File
+```
+
+Kemudian pilih file `GatesTest.cv` yang sudah diunduh.
+
+<img src="assets/importfile.png" alt="Menu Import File pada CircuitVerse" width="250">
+
+### 4. Pilih Rangkaian yang Ingin Diuji
+
+Setelah file berhasil di-import, rangkaian akan muncul di dalam simulator.
+
+Beberapa rangkaian tersedia dalam bentuk circuit atau subcircuit. Pilih tab rangkaian yang ingin diuji, misalnya:
+
+* Gerbang logika dasar
+* Half Adder
+* Full Adder
+* 4-bit Adder
+* Subtractor
+* Multiplexer
+* ALU sederhana
+
+<img src="assets/subcircuit.png" alt="Tampilan subcircuit pada CircuitVerse" width="250">
+
+### 5. Ubah Nilai Input
+
+Klik bagian input pada rangkaian untuk mengubah nilai dari `0` menjadi `1`, atau sebaliknya.
+
+Setelah input diubah, perhatikan output yang dihasilkan. Output akan berubah sesuai dengan logika rangkaian yang sedang diuji.
 
 ## Contoh Pengujian
 
 ### Half Adder
 
-Contoh input:
+Input:
 
 ```text
 A = 1
 B = 1
 ```
 
-Hasil:
+Output:
 
 ```text
 SUM   = 0
 Carry = 1
 ```
 
-Sehingga hasil biner ditulis sebagai:
+Hasil biner:
 
 ```text
 10
 ```
 
+Artinya, nilai `1 + 1` dalam biner menghasilkan `10`.
+
 ### Full Adder
 
-Contoh input:
+Input:
 
 ```text
 A   = 1
@@ -154,18 +264,20 @@ B   = 1
 Cin = 1
 ```
 
-Hasil:
+Output:
 
 ```text
 SUM  = 1
 Cout = 1
 ```
 
-Sehingga hasil biner ditulis sebagai:
+Hasil biner:
 
 ```text
 11
 ```
+
+Artinya, nilai `1 + 1 + 1` menghasilkan `3` dalam desimal, atau `11` dalam biner.
 
 ### 4-bit Adder
 
@@ -178,20 +290,48 @@ Contoh penjumlahan:
   1000
 ```
 
-Artinya:
+Penjelasan:
+
+```text
+0101 = 5
+0011 = 3
+1000 = 8
+```
+
+Jadi, rangkaian 4-bit Adder menghasilkan:
 
 ```text
 5 + 3 = 8
 ```
 
+Contoh lain:
+
+```text
+  1111
++ 0001
+------
+1 0000
+```
+
+Pada contoh tersebut, hasil penjumlahan membutuhkan 5 bit. Karena 4-bit Adder hanya menampilkan 4 bit utama, maka hasilnya menjadi:
+
+```text
+SUM  = 0000
+Cout = 1
+```
+
 ## Tujuan Pengujian
 
-Praktik ini bertujuan untuk memahami cara kerja gerbang logika dalam sistem digital. Selain itu, pengujian ini menunjukkan bagaimana gerbang logika dapat disusun menjadi rangkaian yang lebih kompleks, mulai dari Half Adder, Full Adder, 4-bit Adder, hingga ALU sederhana.
+Tujuan dari praktik ini adalah untuk memahami hubungan antara gerbang logika dan rangkaian digital yang lebih kompleks.
 
-Melalui pengujian ini, konsep arsitektur komputer dapat dipahami secara lebih konkret karena proses perhitungan biner dapat diamati langsung melalui perubahan input dan output pada rangkaian.
+Melalui pengujian ini, kita dapat melihat bahwa rangkaian seperti Half Adder, Full Adder, dan 4-bit Adder sebenarnya dibangun dari kombinasi gerbang logika sederhana. Dengan kata lain, operasi penjumlahan biner yang digunakan dalam sistem komputer dapat dijelaskan melalui susunan gerbang logika.
+
+Praktik ini juga membantu memperjelas konsep dasar arsitektur komputer, terutama pada bagian bagaimana komputer melakukan operasi aritmetika secara digital.
 
 ## Catatan
 
-File `.cv` hanya dapat dibuka melalui CircuitVerse. Pastikan file berhasil di-import sebelum melakukan pengujian rangkaian.
+File dengan format `.cv` hanya dapat dibuka menggunakan CircuitVerse.
 
-Jika tampilan rangkaian terlihat terlalu kecil, gunakan fitur zoom pada simulator CircuitVerse agar setiap koneksi dan output dapat diamati dengan jelas.
+Jika tampilan rangkaian terlihat terlalu kecil, gunakan fitur zoom pada simulator agar koneksi antar gerbang dan output dapat diamati dengan lebih jelas.
+
+Pastikan setiap input diuji secara bertahap agar perubahan output lebih mudah dipahami.
